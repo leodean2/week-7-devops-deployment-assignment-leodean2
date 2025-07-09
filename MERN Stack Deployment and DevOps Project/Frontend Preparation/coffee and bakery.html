@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brew & Bake | Artisan Coffee & Bakery</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --primary: #6F4E37; /* Coffee brown */
+            --secondary: #D2B48C; /* Tan */
+            --accent: #E3CAA5; /* Light tan */
+            --text: #333;
+            --light: #f9f5f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text);
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .menu {
+            background-color: var(--light);
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .menu-item p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .testimonials {
+            background-color: white;
+        }
+        
+        .testimonial-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .testimonial {
+            min-width: 300px;
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            scroll-snap-align: start;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .contact {
+            background-color: var(--light);
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+        }
+        
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .info-item i {
+            margin-right: 1rem;
+            color: var(--primary);
+        }
+        
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Specials Banner */
+        .specials-banner {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 99;
+            display: none;
+        }
+        
+        .specials-banner p {
+            margin: 0;
+        }
+        
+        .close-banner {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Brew & <span>Bake</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Artisan Coffee & Fresh Bakery</h1>
+            <p>Handcrafted with love since 2010. Experience the perfect blend of premium coffee and freshly baked goods in our cozy shop.</p>
+            <a href="#menu" class="btn">View Our Menu</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Founded in 2010, Brew & Bake started as a small family-owned coffee stand with a passion for quality and community. What began as a humble operation has grown into a beloved neighborhood destination.</p>
+                    <p>We source our coffee beans directly from sustainable farms and our bakery uses only the finest ingredients, with many items made from scratch daily.</p>
+                    <p>Our mission is simple: to create a welcoming space where people can enjoy exceptional coffee and baked goods while connecting with others.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80" alt="Coffee shop interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Espresso">
+                    <div class="menu-item-content">
+                        <h3>Espresso</h3>
+                        <p>Our signature rich and creamy espresso, made with premium beans.</p>
+                        <span class="price">425ksh</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1347&q=80" alt="Cappuccino">
+                    <div class="menu-item-content">
+                        <h3>Cappuccino</h3>
+                        <p>Perfectly balanced espresso with steamed milk and silky foam.</p>
+                        <span class="price">580ksh</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1562440499-64c9a111f713?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Croissant">
+                    <div class="menu-item-content">
+                        <h3>Butter Croissant</h3>
+                        <p>Flaky, buttery layers made fresh every morning.</p>
+                        <span class="price">480ksh</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1608190003443-86ab6b827402?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Avocado Toast">
+                    <div class="menu-item-content">
+                        <h3>Avocado Toast</h3>
+                        <p>Sourdough bread with smashed avocado, cherry tomatoes, and feta.</p>
+                        <span class="price">1100ksh</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blueberry Muffin">
+                    <div class="menu-item-content">
+                        <h3>Blueberry Muffin</h3>
+                        <p>Moist muffin packed with fresh blueberries and a crunchy top.</p>
+                        <span class="price">425ksh</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cinnamon Roll">
+                    <div class="menu-item-content">
+                        <h3>Cinnamon Roll</h3>
+                        <p>Soft, gooey cinnamon roll with cream cheese frosting.</p>
+                        <span class="price">580ksh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-text">"The best coffee in town! I come here every morning before work. The atmosphere is so welcoming and the croissants are to die for."</p>
+                    <p class="testimonial-author">- Sarah J.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"I love working remotely from Brew & Bake. Great WiFi, delicious coffee, and the avocado toast is my favorite lunch option."</p>
+                    <p class="testimonial-author">- Michael T.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The baristas are so friendly and remember my usual order. It feels like a second home. Highly recommend the cappuccino!"</p>
+                    <p class="testimonial-author">- Emily R.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Their seasonal drinks are always creative and delicious. The pumpkin spice latte in fall is the best I've ever had."</p>
+                    <p class="testimonial-author">- David L.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Visit Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Location & Hours</h3>
+                    <p>Come visit us at our cozy shop in downtown. We'd love to serve you!</p>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>ROYSAMBU,KASARANI,KENYA</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <p>0114864715</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>Leodean890@gmail.com</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Monday - Friday: 6:30 AM - 7:00 PM<br>
+                           Saturday - Sunday: 7:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="logo">Brew & <span>Bake</span></div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2023 Brew & Bake. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div class="specials-banner" id="specialsBanner">
+        <p>🎉 Today's Special: Buy any pastry and get a coffee for half price! 🎉</p>
+        <button class="close-banner" id="closeBanner">&times;</button>
+    </div>
+
+    <script>
+        // JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Show specials banner after 3 seconds
+            setTimeout(() => {
+                document.getElementById('specialsBanner').style.display = 'block';
+            }, 3000);
+            
+            // Close banner functionality
+            document.getElementById('closeBanner').addEventListener('click', function() {
+                document.getElementById('specialsBanner').style.display = 'none';
+            });
+            
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+            
+            // Mobile menu toggle (would need additional HTML for mobile menu button)
+            // This is a placeholder for potential mobile menu functionality
+        });
+        
+        // Simple animation for menu items when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.style.opacity = 0;
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
