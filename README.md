@@ -1,8 +1,8 @@
 # MERN Stack Deployment Project
 
 ## Application URLs
-- Frontend: [https://your-app.vercel.app](https://your-app.vercel.app)
-- Backend: [https://your-api.render.com](https://your-api.render.com)
+- Frontend: [https://your-app.vercel.app](mern-stack-frontend-vqmv.vercel.app)
+- Backend: [https://your-api.render.com](https://your-app-backend-wjq4.onrender.com)
 
 ## Deployment Process
 1. Backend deployed to Render
